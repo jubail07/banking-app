@@ -8,8 +8,11 @@ exports.getHomePage = async (req, res) => {
     try {
         const username = req.user.username
         const user = await User.findOne({ username: username })
-        const upiUser = await Upi.findOne({name:user.fullname})
-        const qrData = `http://192.168.29.91:3000/people/payment/${upiUser.id}`
+        const upiUser = await Upi.findOne({ name: user.fullname })
+        // const qrData = `http://192.168.29.91:3000/people/payment/${upiUser.id}`
+        const host = req.headers.host; // gets host like 'localhost:3000' or 'yourdomain.com'
+        const protocol = req.protocol; // gets 'http' or 'https'
+        const qrData = `${protocol}://${host}/people/payment/${upiUser.id}`;
         QRCode.toDataURL(qrData, function (err, url) {
             if (err) {
                 console.log(err)

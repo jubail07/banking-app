@@ -22,7 +22,8 @@ const admin = require('./routes/admin')
 app.use('/admin', admin, adminPanel)
 app.use('/', authPages, userPages)
 
+const port = process.env.PORT || 3000
 
-app.listen(3000,() => {
+app.listen(port,() => {
     console.log('app started')
 })
