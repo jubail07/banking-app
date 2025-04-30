@@ -1,4 +1,4 @@
-const Admin = require('../model/admin')
+const Admin = require('../model/Admin')
 const createJWt = require('../utils/adminJWT')
 
 // exports.getSignupPage = async (req, res) => {
