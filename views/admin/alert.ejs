@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>insufficient balance</h1>
+    <input type="text" hidden id="id" value="<%= id %>">
+
+    <script>
+        const id = document.getElementById('id').value
+        setTimeout(()=>{
+            window.location.href = window.location.origin+'/admin/accountmanage/'+id
+        },2000)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/sidebar.css">
+    <style>
+        .applicationApproval {
+            width: 100%;
+            background-color: #e0f7fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        th {
+            background-color: #00C9A7;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        td a:hover {
+            color: #0056b3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <%-include ('../adminNavbar') %>
+
+        <div class="wrapper">
+            <%-include('../sidebar')%>
+                <div class="content">
+                    <div class="nav-adjust"></div>
+                    <h1>Rejected Accounts</h1>
+                    <table class="applicationApproval">
+                        <tr>
+                            <th>Name</th>
+                            <th>Account Type</th>
+                            <th>status</th>
+                        </tr>
+                        <%user.forEach(i=>{ %>
+                            <tr>
+                                <td>
+                                    <%= i.fullname %>
+                                </td>
+                                <td>
+                                    <%= i.accountType %>
+                                </td>
+                                <td>
+                                    Rejected
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </table>
+                </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: montserrat;
+    letter-spacing: 2px;
+}
+
+.admin-navbar{
+    width: 100%;
+    background-color: #333333;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-navbar h3 {
+    color: #00C9A7;
+    margin-left: 10px;
+    font-size: 24px;
+}
+
+.admin-navbar a {
+    background-color: #00C9A7;
+    text-decoration: none;
+    color: #131010;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.admin-navbar a:hover {
+    background-color: #00b195;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.side-bar{
+    background-color: #333;
+    /* border:  2px solid yellow; */
+    height: 100dvh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 25%;
+    padding: 20px;
+    text-align: center;
+}
+
+.content{
+    background-color: #131010;
+    height: 100dvh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 75%;
+    padding: 20px;
+}
+
+.content h1{
+    color: #ffffff;
+}
+
+.nav-adjust{
+    background-color: transparent;
+    height: 80px;
+}
+
+.side-bar-item{
+    display: block;
+    padding: 12px 20px;
+    font-weight: 600;
+    margin-top: 5px;
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.side-bar-item:hover{
+    background-color: #00C9A7;
+    color: #0F0F0F;
+    transform: translateX(5px);
+}
+
+.side-bar-item span {
+    background-color: #FFCE00;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+
+@media all and (max-width:800px){
+    .wrapper{
+        flex-direction: column;
+    }
+    .side-bar,
+    .content{
+        width: 100%;
+        height: max-content;
+        padding: 20px;
+    }
+
+    .side-bar{
+        order: 2;
+    }
+}

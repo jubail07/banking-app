@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00C9A7;
+        }
+
+        .w-20 {
+            width: 20%;
+            border-right: none;
+        }
+
+        .w-5 {
+            width: 5%;
+            border-left: none;
+            border-right: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            border-radius: 5px;
+            padding: 8px 20px;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: black;
+            transition: 0.3s ease-in-out;
+        }
+
+        button {
+            text-decoration: none;
+            color: black;
+            border-radius: 5px;
+            padding: 8px 20px;
+            border: none;
+        }
+
+        .list-custom{
+            background-color: #2C2C2C;
+            color: #E0E0E0;
+            font-weight: 500;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+<body style="background-color: #333;">
+    <h1>user details</h1>
+    <div class="wrapper pl-5 pr-5 pb-2">
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Name</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.fullname %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Date of Birth</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.dob %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Gender</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.gender %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Address</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.address %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Account Type</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.accountType %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">E-mail</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.email %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Occupation</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.occupation %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">Phone no</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.phone %>
+            </li>
+        </ul>
+        <ul class="list-group list-group-horizontal w-100 ul-costom">
+            <li class="list-group-item list-custom w-20">ID Proof</li>
+            <li class="list-group-item list-custom w-5">:</li>
+            <li class="list-group-item list-custom w-75">
+                <%= userDetails.idProof %>
+            </li>
+        </ul>
+    </div>
+    <div class="container p-0 m-0 d-flex justify-content-center align-items-center" style="gap: 5%;">
+        <form action="/admin/accepted/<%=userDetails.id %>" method="post">
+            <input style="padding: 5px; background-color: #333; outline: none; border: 2px solid black; border-radius: 5px;" type="number" placeholder="account number" id="accountNumber" name="accountNumber" required>
+            <button style="background-color: green; color: #E0E0E0; font-weight: 600;">accept</button>
+        </form>
+        <a style="background-color: red; color: #E0E0E0; font-weight: 600;" href="/admin/reject/<%=userDetails.id %>" >reject</a>
+        <a style="background-color: black; color: white; font-weight: 600;" href="/admin/user">back</a>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

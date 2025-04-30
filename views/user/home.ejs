@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/userSidebar.css">
+    <style>
+        .w-20 {
+            width: 20%;
+            border-right: none;
+        }
+
+        .w-5 {
+            width: 5%;
+            border-right: none;
+        }
+
+        .wrapper {
+            background-color: #F4F6F8;
+            color: #2C3E50;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+        }
+
+        .active {
+            background-color: #547792;
+        }
+
+        @media all and (max-width:576px) {
+            .list-group-horizontal .list-group-item {
+                width: 100%;
+                border-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <%-include('../userSidebar')%>
+            <div class="content">
+                <div class="nav-adjust"></div>
+                <div class=" pl-5 pr-5 pb-2">
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Name</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.fullname %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Date of Birth</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.dob %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Gender</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.gender %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Address</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.address %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Account Type</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.accountType %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">E-mail</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.email %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Occupation</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.occupation %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Phone no</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.phone %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">ID Proof</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.idProof %>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal w-100">
+                        <li class="list-group-item w-20">Account Number</li>
+                        <li class="list-group-item w-5">:</li>
+                        <li class="list-group-item w-75">
+                            <%= user.accountNumber %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="<%=a%>">
+                </div>
+
+            </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('home').classList.add('active')
+
+
+    </script>
+</body>
+
+</html>

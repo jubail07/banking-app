@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/userSidebar.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            height: 100dvh;
+            position: relative;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: white;
+            overflow-y: auto;
+        }
+
+        input {
+            width: 85%;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 10px;
+            background-color: rgb(61, 61, 61);
+        }
+
+        button {
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 20px;
+            position: absolute;
+            bottom: 10px;
+            right: 5px;
+        }
+
+        .transaction-msg {
+            max-width: 70%;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+
+        .sent {
+            background-color: #e0ffe0;
+            color: green;
+            float: right;
+            text-align: right;
+            clear: both;
+        }
+
+        .received {
+            background-color: #ffe0e0;
+            color: red;
+            float: left;
+            clear: both;
+        }
+
+        form {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 0 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <%-include ('../userSidebar')%>
+            <div class="content ">
+                <div class="container">
+                    <% transaction.forEach(i=>{%>
+                        <%if(i.senderAccountNumber===user.accountNumber){%>
+                            <p class="transaction-msg sent">$
+                                <span>
+                                    <%= i.amount %>
+                                </span>
+                            </p>
+                            <%}else if (i.recieverAccountNumber===user.accountNumber){%>
+
+                                <p class="transaction-msg received">$
+                                    <span>
+                                        <%= i.amount %>
+                                    </span>
+                                </p>
+                                <% } %>
+                                    <% }) %>
+                                        <form action="/people/payment/<%=reciever.id%>" method="post">
+                                            <input type="number" placeholder="amount" name="amount" required>
+                                            <button type="submit">send</button>
+                                        </form>
+                </div>
+
+            </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

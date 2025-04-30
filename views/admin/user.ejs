@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/sidebar.css">
+    <style>
+        .applicationApproval {
+            width: 100%;
+            background-color: #1E1E1E;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px 20px;
+            text-align: center;
+            color: #E0E0E0;
+        }
+
+        th {
+            background-color: #2C2C2C;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        tr {
+            background-color: #252525;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover {
+            background-color: #333333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #00C9A7;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #00b195;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00C9A7;
+        }
+
+        @media (max-width: 800px) {
+            .col-8 {
+                width: 100%;
+            }
+
+            table,
+            th,
+            td {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <%-include ('../adminNavbar') %>
+
+        <div class="wrapper">
+            <%-include('../sidebar')%>
+                <div class="content">
+                    <div class="nav-adjust"></div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h1 style="text-align: center;">Application Approval</h1>
+                            <table class="applicationApproval">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Account Type</th>
+                                    <th>Status</th>
+                                    <th>profile</th>
+                                </tr>
+                                <%users.forEach(i=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= i.fullname %>
+                                        </td>
+                                        <td>
+                                            <%= i.accountType %>
+                                        </td>
+                                        <td>
+                                            <%= i.approved %>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/userdetails/<%=i.id%>">view</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+</body>
+
+</html>
