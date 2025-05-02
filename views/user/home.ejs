@@ -11,6 +11,8 @@
     <style>
         .w-20 {
             width: 20%;
+            font-size: 14px;
+            font-weight: 600;
             border-right: none;
         }
 
@@ -25,14 +27,28 @@
             font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
         }
 
+        .list-div {
+            padding: 50px;
+        }
+
         .active {
             background-color: #547792;
         }
 
+        .abc{
+            word-wrap: break-word;
+        }
+
         @media all and (max-width:576px) {
-            .list-group-horizontal .list-group-item {
-                width: 100%;
-                border-right: 0;
+            .list-div {
+                padding: 0;
+            }
+
+            .w-20{
+                width: 25%;
+                padding: 10px;
+                font-size: 12px;
+                font-weight: 600;
             }
         }
     </style>
@@ -42,75 +58,74 @@
     <div class="wrapper">
         <%-include('../userSidebar')%>
             <div class="content">
-                <div class="nav-adjust"></div>
-                <div class=" pl-5 pr-5 pb-2">
+                <div class="list-div">
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Name</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.fullname %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Date of Birth</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.dob %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Gender</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.gender %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Address</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.address %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Account Type</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.accountType %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">E-mail</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.email %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Occupation</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.occupation %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
                         <li class="list-group-item w-20">Phone no</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.phone %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
-                        <li class="list-group-item w-20">ID Proof</li>
+                        <li class=" list-group-item w-20">ID Proof</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.idProof %>
                         </li>
                     </ul>
                     <ul class="list-group list-group-horizontal w-100">
-                        <li class="list-group-item w-20">Account Number</li>
+                        <li class=" list-group-item w-20">Account Number</li>
                         <li class="list-group-item w-5">:</li>
-                        <li class="list-group-item w-75">
+                        <li class="list-group-item w-75 abc">
                             <%= user.accountNumber %>
                         </li>
                     </ul>

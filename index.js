@@ -14,16 +14,21 @@ app.use(cookieparser())
 const { connectDB } = require('./config/database')
 connectDB()
 
+const abcd = (req, res , next)=>{
+    res.set('Cache-Control', 'no-store')
+    return next()
+}
+
 const authPages = require('./routes/auth')
 const userPages = require('./routes/dashboard')
 const adminPanel = require('./routes/adminPanel')
 const admin = require('./routes/admin')
 
 app.use('/admin', admin, adminPanel)
-app.use('/', authPages, userPages)
+app.use('/', abcd ,  authPages, userPages)
 
 const port = process.env.PORT || 3000
 
-app.listen(port,() => {
+app.listen(port, () => {
     console.log('app started')
 })
