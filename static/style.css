@@ -18,68 +18,73 @@
 /* signup */
 
 .signup {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    color: #0f1012;
-    background-color: #333746;
-    height: 100vh; 
-    display: flex; 
-    align-items: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    max-width: 500px;
+}
 
-    button{
-        width: 100%;
-        padding: 10px;
-        background-color: #333746;
-        border: none;
-    }
 
-    button:hover{
-        background-color: #0f1012;
-        transition: .3s ease-in-out;
-        border-radius: 10px;
-        color: #E0E0E0;
-    }
+.signup h1 {
+    text-align: center;
+}
 
+.signup .custom-btn {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
 /* login */
 
 .login {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    color: #0f1012;
-    background-color: #333746;
-    height: 100vh; 
-    display: flex; 
-    align-items: center;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    max-width: 450px;
 
-    button{
-        width: 100%;
-        padding: 10px;
-        background-color: #333746;
-        border: none;
-    }
+}
 
-    button:hover{
-        background-color: #0f1012;
-        transition: .3s ease-in-out;
-        border-radius: 10px;
-        color: #E0E0E0;
-    }
+.login h1 {
+    margin-bottom: 30px;
+}
+
+.custom-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #5a67d8;
+    color: white;
+    border: none;
+}
+
+.custom-btn:hover {
+    background-color: #434190;
+    transition: .3s ease-in-out;
+    border-radius: 10px;
+    color: #E0E0E0;
+}
+
+.signup-link {
+    text-align: center;
 }
 
 /* home */
 
-.custom-input{
+.custom-input {
     width: 100%;
     padding: 0;
     margin: 0;
 }
 
-.form-custom{
-    width: 100%; 
-    padding: 20px 200px; 
+.form-custom {
+    width: 100%;
+    padding: 20px 200px;
     margin-top: 100px;
 }
