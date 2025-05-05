@@ -32,7 +32,7 @@
 
 .content{
     background-color: #FFFFFF;
-    border:  1px solid #DCE1E5;
+    /* border:  1px solid #DCE1E5; */
     height: 100dvh;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -63,7 +63,10 @@
 
 }
 
-@media all and (max-width:800px){
+
+
+
+@media all and (max-width: 800px){
     .wrapper{
         flex-direction: column;
     }
@@ -75,6 +78,7 @@
     }
 
     .side-bar{
-        order: 2;
+        /* order: 2; */
+        display: none;
     }
 }
