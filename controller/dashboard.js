@@ -9,15 +9,17 @@ exports.getHomePage = async (req, res) => {
         const username = req.user.username
         const user = await User.findOne({ username: username })
         const upiUser = await Upi.findOne({ name: user.fullname })
-        // const qrData = `http://192.168.29.91:3000/people/payment/${upiUser.id}`
-        const host = req.headers.host; // gets host like 'localhost:3000' or 'yourdomain.com'
-        const protocol = req.protocol; // gets 'http' or 'https'
+        const host = req.headers.host
+        const protocol = req.protocol
+        if(!upiUser){
+           return res.render('user/home-without-qr',{user})
+        }
         const qrData = `${protocol}://${host}/people/payment/${upiUser.id}`;
         QRCode.toDataURL(qrData, function (err, url) {
             if (err) {
                 console.log(err)
             }
-            var a = url
+            a = url
             return res.render('user/home', { user, a })
         })
 
@@ -94,13 +96,12 @@ exports.getUpi = async (req, res) => {
 
 exports.upi = async (req, res) => {
     try {
-
+        const username = req.user.username
+        const user = await User.findOne({ username: username })
         const existUpi = await Upi.findOne({ upiId: req.body.upiId + req.body.upiCode })
         if (existUpi) {
             return res.redirect('/upi')
-        }
-        const username = req.user.username
-        const user = await User.findOne({ username: username })
+        }        
         let upi = {
             upiId: req.body.upiId + req.body.upiCode,
             name: user.fullname,
@@ -108,7 +109,7 @@ exports.upi = async (req, res) => {
             id: Date.now()
         }
         Upi.create(upi)
-        return res.redirect('/upi')
+        return res.redirect('/')
     } catch (error) {
         console.log('error in upi', error)
     }
