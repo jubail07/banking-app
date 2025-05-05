@@ -44,12 +44,11 @@
         }
 
         .camera-stream {
-            width: 50%;
+            width: 40%;
             aspect-ratio: 16/9;
             position: fixed;
-            top: 15%;
+            top: 25%;
             right: 25%;
-            display: none;
         }
 
         .camera-button {
@@ -66,6 +65,17 @@
             width: 500px;
             height: 400px;
             border: 2px solid black;
+            position: fixed;
+            top: 15%;
+            right: 25%;
+            display: none;
+        }
+
+        #camera-flip {
+            background-color: #f9a826;
+            padding: 7px;
+            width: 100%;
+            border: none;
         }
 
         #camera-close {
@@ -73,13 +83,12 @@
             font-weight: 600;
             position: absolute;
             top: 15%;
-            right: 25%;
+            right: 15%;
             border: none;
             padding: 5px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            display: none;
         }
 
         .nav-bar {
@@ -96,6 +105,9 @@
             text-decoration: none;
             color: #F4F6F8;
         }
+
+
+
 
         @media all and (max-width:800px) {
             .nav-bar {
@@ -130,11 +142,13 @@
                 </div>
             </div>
 
-            <button id="camera-button" class="camera-button">scanner</button>
-            <video id="video" class="camera-stream" autoplay></video>
-            <canvas width="640" height="480" style="display: none;" id="canvas"></canvas>
-            <button id="camera-close" onclick="closeCamera()">X</button>
-            <button id="camera-flip">Flip Camera</button>
+            <button id="camera-button" class="camera-button" onclick="cameraOn()">scanner</button>
+            <div class="camera-container">
+                <video id="video" class="camera-stream" autoplay></video>
+                <canvas width="640" height="480" style="display: none;" id="canvas"></canvas>
+                <button id="camera-close" onclick="closeCamera()">X</button>
+                <button id="camera-flip" onclick="flipCamera()">Flip Camera</button>
+            </div>
 
             <div class="nav-bar">
                 <a href="/"><i class="bi bi-house"></i></a>
@@ -164,15 +178,19 @@
         var video = document.getElementById('video')
         const cameraButton = document.querySelector('#camera-button')
         var currentStream = null
+        var flipButton = document.querySelector('#camera-flip')
+        let useBackCamera = true
 
-        cameraButton.addEventListener('click', async function () {
+
+        async function cameraOn() {
             try {
                 if (navigator.mediaDevices.getUserMedia) {
-                    let video = document.getElementById('video')
-                    video.style.display = 'block'
-                    let close = document.getElementById('camera-close')
-                    close.style.display = 'block'
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+                    document.querySelector('.camera-container').style.display = 'block'
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            facingMode: useBackCamera ? { ideal: 'environment' } : { ideal: 'user' }
+                        }
+                    })
                     currentStream = stream
                     video.srcObject = stream
                     video.play()
@@ -184,8 +202,15 @@
                 console.log(error)
                 alert('camera error')
             }
-        })
+        }
 
+        async function flipCamera() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+            useBackCamera = !useBackCamera;
+            cameraOn()
+        }
 
         function scanQRCode() {
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
@@ -198,35 +223,14 @@
         }
 
         function closeCamera() {
-            let video = document.getElementById('video')
-            video.style.display = 'none'
-            let close = document.getElementById('camera-close')
-            close.style.display = 'none'
+            document.querySelector('.camera-container').style.display = 'none'
             if (currentStream) {
                 currentStream.getTracks().forEach(i => i.stop())
             }
             video.pause()
         }
 
-        document.getElementById('camera-flip').addEventListener('click', async function () {
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-            }
-            useBackCamera = !useBackCamera;
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: useBackCamera ? { ideal: 'environment' } : { ideal: 'user' }
-                    }
-                });
-                currentStream = stream;
-                video.srcObject = stream;
-                video.play();
-            } catch (error) {
-                console.error('Error flipping camera', error);
-            }
-        });
-        
+
     </script>
 </body>
 
