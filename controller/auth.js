@@ -41,6 +41,9 @@ exports.login = async (req, res) => {
         const token = createJWT(user)
         res.cookie('userToken', token, { httpOnly: true })
 
+        if(user.applied && user.rejected){
+            return res.redirect('/login')
+        }
         if (user.applied && !user.approved) {
             return res.redirect('/pending')
         }

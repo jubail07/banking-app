@@ -26,7 +26,7 @@
                 <div class="col-12 ">
                     <div class="form-group">
                         <label for="uname">Username:</label>
-                        <input type="text" class="form-control" id="uname" placeholder="Enter username" name="username"
+                        <input oninput="lowerCase()" type="text" class="form-control" id="uname" placeholder="Enter username" name="username"
                             required>
                     </div>
                 </div>
@@ -49,6 +49,16 @@
             <%= msg %>
         </p>
     </div>
+
+
+    <script>
+        function lowerCase(){
+            let input = document.getElementById('uname')
+            let inputValue = input.value
+            inputValue = inputValue.toLowerCase()
+            input.value = inputValue
+        }
+    </script>
 </body>
 
 </html>

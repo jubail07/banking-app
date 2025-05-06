@@ -132,6 +132,9 @@ exports.getPayment = async (req, res) => {
         const username = req.user.username
         const user = await User.findOne({ username: username })
         const reciever = await Upi.findOne({ id: id })
+        if(!reciever){
+            return res.render('user/error')
+        }
         const sender = await Upi.findOne({ name: user.fullname })
         const transaction = await Transaction.find({
             $or: [
