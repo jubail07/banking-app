@@ -36,6 +36,9 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
     },
+    pin: {
+        type: String,
+    },
     applied: {
         type: Boolean,
         default: false

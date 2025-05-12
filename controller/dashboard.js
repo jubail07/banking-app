@@ -11,8 +11,8 @@ exports.getHomePage = async (req, res) => {
         const upiUser = await Upi.findOne({ name: user.fullname })
         const host = req.headers.host
         const protocol = req.protocol
-        if(!upiUser){
-           return res.render('user/home-without-qr',{user})
+        if (!upiUser) {
+            return res.render('user/home-without-qr', { user })
         }
         const qrData = `${protocol}://${host}/people/payment/${upiUser.id}`;
         QRCode.toDataURL(qrData, function (err, url) {
@@ -34,7 +34,7 @@ exports.getFormSubmissionPage = async (req, res) => {
 
 exports.accountOpeningForm = async (req, res) => {
     try {
-        const { fullName, dob, phone, email, gender, accountType, occupation, idProof, address } = req.body
+        const { fullName, dob, phone, email, gender, accountType, occupation, idProof, address, pinNmbr } = req.body
         let user = await User.findOne({ username: req.user.username })
         if (!user) {
             return res.render('user/formSubmission')
@@ -49,6 +49,7 @@ exports.accountOpeningForm = async (req, res) => {
             user.occupation = occupation,
             user.idProof = idProof,
             user.address = address,
+            user.pin = pinNmbr,
             user.id = Date.now()
         user.applied = true
 
@@ -101,7 +102,7 @@ exports.upi = async (req, res) => {
         const existUpi = await Upi.findOne({ upiId: req.body.upiId + req.body.upiCode })
         if (existUpi) {
             return res.redirect('/upi')
-        }        
+        }
         let upi = {
             upiId: req.body.upiId + req.body.upiCode,
             name: user.fullname,
@@ -132,8 +133,8 @@ exports.getPayment = async (req, res) => {
         const username = req.user.username
         const user = await User.findOne({ username: username })
         const reciever = await Upi.findOne({ id: id })
-        if(!reciever){
-            return res.render('user/error')
+        if (!reciever) {
+            return res.render('user/error',{msg:'unexpected error occurs'})
         }
         const sender = await Upi.findOne({ name: user.fullname })
         const transaction = await Transaction.find({
@@ -151,13 +152,16 @@ exports.getPayment = async (req, res) => {
 exports.payment = async (req, res) => {
     try {
         const id = req.params.id
-        const { amount } = req.body
+        const { amount, pinNumber } = req.body
         if (isNaN(amount) || !amount) {
             return res.status(400).send('please enter a valid amount')
         }
         let money = parseFloat(amount)
         const username = req.user.username
         let sender = await User.findOne({ username: username })
+        if(pinNumber !== sender.pin){
+            return res.render('user/error',{msg:'incorrect pin'})
+        }
         let senderUpi = await Upi.findOne({ name: sender.fullname })
         let finder = await Upi.findOne({ id: id })
         let reciever = await User.findOne({ accountNumber: finder.accountNumber })
@@ -185,6 +189,7 @@ exports.payment = async (req, res) => {
         console.log(error, 'error in payment')
     }
 }
+
 
 exports.logout = async (req, res) => {
     return res.clearCookie('userToken').redirect('/login')

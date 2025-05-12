@@ -7,8 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="/userSidebar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/userSidebar.css">
     <style>
         * {
             box-sizing: border-box;
@@ -16,7 +16,7 @@
             margin: 0;
         }
 
-        .container {
+        .container-wrapper {
             height: 100dvh;
             position: relative;
             border: 2px solid #ddd;
@@ -26,25 +26,16 @@
             overflow-y: auto;
         }
 
-        input {
-            width: 85%;
-            padding: 5px;
+        .amountInput {
+            width: 100%;
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             position: absolute;
             bottom: 10px;
-            background-color: rgb(61, 61, 61);
+            background-color: #f1f1f1;
         }
 
-        button {
-            background-color: green;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 20px;
-            position: absolute;
-            bottom: 10px;
-            right: 5px;
-        }
 
         .transaction-msg {
             max-width: 70%;
@@ -71,38 +62,32 @@
             clear: both;
         }
 
-        form {
+        .form {
             position: absolute;
             bottom: 10px;
             left: 0;
             width: 100%;
-            display: flex;
-            gap: 10px;
             padding: 0 10px;
         }
 
-        input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            background-color: #f1f1f1;
-        }
-
-        button {
-            padding: 10px 20px;
+        .pinButton {
             background-color: #28a745;
             color: white;
             border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            position: absolute;
+            bottom: 10px;
+            right: 5px;
             border-radius: 20px;
             transition: background-color 0.2s;
         }
 
-        button:hover {
+        .pinButton:hover {
             background-color: #218838;
         }
 
-        .back-btn{
+        .back-btn {
             padding: 7px;
             background-color: black;
             position: fixed;
@@ -117,13 +102,47 @@
             display: none;
         }
 
-        .back-btn a{
+        .back-btn a {
             text-decoration: none;
             color: #f1f1f1;
         }
 
-        @media all and (max-width:800px){
-            .back-btn{
+        .pin-container {
+            width: 100%;
+            height: 100dvh;
+            border: 2px solid red;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 80;
+            gap: 10px;
+        }
+
+        .payButton{
+            width: 30%;
+            border: none;
+            padding: 7px;
+        }
+
+        .closeButton {
+            width: 30%;
+            border: none;
+            padding: 7px;
+        }
+
+        .pinInput {
+            width: 30%;
+            padding: 8px;
+        }
+
+        @media all and (max-width:800px) {
+            .back-btn {
                 display: flex;
             }
         }
@@ -132,12 +151,12 @@
 
 <body>
     <div class="wrapper">
-        <%-include ('../userSidebar')%> 
+        <%-include ('../userSidebar')%>
             <div class="back-btn">
                 <a href="/people"><i class="bi bi-arrow-left-short"></i></a>
             </div>
             <div class="content ">
-                <div class="container">
+                <div class="container-wrapper">
                     <% transaction.forEach(i=>{%>
                         <%if(i.senderAccountNumber===user.accountNumber){%>
                             <p class="transaction-msg sent">$
@@ -154,10 +173,27 @@
                                 </p>
                                 <% } %>
                                     <% }) %>
-                                        <form action="/people/payment/<%=reciever.id%>" method="post">
-                                            <input type="number" placeholder="amount" name="amount" required>
-                                            <button type="submit">send</button>
+
+
+                                        <form class="form" action="/people/payment/<%=reciever.id%>" method="post">
+                                            <div class="row m-0">
+                                                <div class="col-9">
+                                                    <input class="amountInput" type="number" placeholder="amount"
+                                                        name="amount" required>
+                                                </div>
+                                                <div class="col-3">
+                                                    <button class="pinButton" type="button"
+                                                        onclick="pinNmbr()">pay</button>
+                                                </div>
+                                            </div>
+                                            <div class="pin-container">
+                                                <input type="number" class="pinInput" name="pinNumber" required>
+                                                <button class="payButton" type="submit">pay</button>
+                                                <button class="closeButton" type="button"
+                                                    onclick="closePinContainer()">Close</button>
+                                            </div>
                                         </form>
+
                 </div>
 
             </div>
@@ -170,6 +206,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
+
+    <script>
+        function pinNmbr() {
+            const amountInput = document.querySelector('.amountInput').value
+            if (amountInput) {
+                document.querySelector('.pin-container').style.display = 'flex'
+            }else{
+                alert('enter a valid amount')
+            }
+        }
+
+        function closePinContainer() {
+            document.querySelector('.pin-container').style.display = 'none'
+        }
+    </script>
 </body>
 
 </html>

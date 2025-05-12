@@ -44,38 +44,42 @@
         }
 
         .camera-stream {
-            width: 40%;
-            aspect-ratio: 16/9;
-            position: fixed;
-            top: 25%;
-            right: 25%;
+            width: 50%;
+            height: 50dvh;
+            aspect-ratio: 1;
         }
 
         .camera-button {
             background-color: #0f4c81;
+            color: #e0e0e0;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             padding: 10px;
             position: absolute;
-            top: 20px;
-            right: 50%;
+            top: 2px;
+            right: 5px;
         }
 
         .camera-container {
-            width: 500px;
-            height: 400px;
+            width: 100%;
+            height: 100dvh;
+            background: rgba(0, 0, 0, 0.8);
             border: 2px solid black;
             position: fixed;
-            top: 15%;
-            right: 25%;
+            top: 0;
+            left: 0;
             display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
         #camera-flip {
             background-color: #f9a826;
             padding: 7px;
-            width: 100%;
+            width: 50%;
             border: none;
+            display: none;
         }
 
         #camera-close {
@@ -94,7 +98,7 @@
         .nav-bar {
             width: 100%;
             background-color: #0F4C81;
-            padding: 30px;
+            padding: 20px;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -120,6 +124,16 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+
+            #camera-flip {
+                display: block;
+            }
+
+            .camera-stream {
+                width: 100%;
+                aspect-ratio: 1/1.5;
+                border: 2px solid red;
             }
         }
     </style>
@@ -185,7 +199,7 @@
         async function cameraOn() {
             try {
                 if (navigator.mediaDevices.getUserMedia) {
-                    document.querySelector('.camera-container').style.display = 'block'
+                    document.querySelector('.camera-container').style.display = 'flex'
                     const stream = await navigator.mediaDevices.getUserMedia({
                         video: {
                             facingMode: useBackCamera ? { ideal: 'environment' } : { ideal: 'user' }

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { ifUserLoggedin } = require('../middleware/userLoginVerifier')
-const { logout, getHomePage, accountOpeningForm, getPendingPage, getFormSubmissionPage, getTransaction, getUpi, upi, getPeople, getPayment, payment } = require('../controller/dashboard')
+const { logout, getHomePage, accountOpeningForm, getPendingPage, getFormSubmissionPage, getTransaction, getUpi, upi, getPeople, getPayment, payment, qrPage } = require('../controller/dashboard')
 
 router
     .route('/')
